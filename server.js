@@ -2,22 +2,27 @@ const express = require('express');
 const cors = require('cors');
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
-// Middleware
-app.use(cors());
+// ✅ CORS setup to allow frontend
+const corsOptions = {
+  origin: 'http://frontendenv.ap-south-1.elasticbeanstalk.com',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true
+};
+app.use(cors(corsOptions));
+
+// ✅ JSON body parsing
 app.use(express.json());
 
-// Signup route
+// ✅ Routes
 app.post('/api/signup', (req, res) => {
   const { username, password } = req.body;
-
-  // Simulate success (you can replace with DB logic)
   console.log('Received signup:', username, password);
   res.json({ message: 'Signup successful!' });
 });
 
-// Start server
+// ✅ Start server
 app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://Backend-service.ap-south-1.elasticbeanstalk.com:${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
