@@ -22,7 +22,7 @@ app.post('/api/signup', (req, res) => {
   res.json({ message: 'Signup successful!' });
 });
 
-// ✅ Add this login route
+// ✅ Login route
 app.post('/api/login', (req, res) => {
   const { username, password } = req.body;
   console.log('✅ Received login:', username, password);
@@ -35,6 +35,7 @@ app.post('/api/login', (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
+// ✅ Explicitly bind to 0.0.0.0 so it's accessible publicly
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
