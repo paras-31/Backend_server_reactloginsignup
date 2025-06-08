@@ -3,7 +3,8 @@ name: Deploy to EC2 with Approval
 on:
   push:
     branches:
-      - main   # or your deployment branch
+      - main
+  workflow_dispatch:  # Enables manual trigger via GitHub UI
 
 permissions:
   id-token: write
@@ -43,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: production
-      url: http://52.66.241.131  # optional, your EC2 URL
+      url: http://52.66.241.131
 
     steps:
       - name: Checkout code
